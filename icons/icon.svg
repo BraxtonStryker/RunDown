@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- RunDown icon: a page of text with a down arrow (Markdown's "M↓") -->
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14A394"/><stop offset="1" stop-color="#0B5F59"/></linearGradient></defs>
+  <rect width="512" height="512" rx="112" fill="url(#g)"/>
+  <rect x="104" y="84" width="256" height="328" rx="30" fill="#FFFFFF"/>
+  <path d="M152 156H272" stroke="#0F766E" stroke-width="32" stroke-linecap="round"/>
+  <path d="M152 222H312M152 276H286M152 330H230" stroke="#0F766E" stroke-opacity=".5" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="356" cy="360" r="82" fill="#0F766E" stroke="#FFFFFF" stroke-width="28"/>
+  <path d="M356 314V398M322 366L356 400L390 366" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
