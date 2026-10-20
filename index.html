@@ -127,8 +127,10 @@
   .tab[aria-current="page"]{color:var(--accent); border-bottom-color:var(--accent)}
   .tab.icon{display:inline-grid; place-items:center; padding:12px 10px 10px}
   .tab.icon svg{width:20px; height:20px}
-  /* Open documents: a closable tab each, after Documents */
-  .dtabs{display:flex; align-items:center; gap:4px; margin-left:6px}
+  /* Open documents: a closable tab each, next to the document name in the bar that stays on screen */
+  .dtabbar{flex:1 1 200px; min-width:0; display:flex; align-items:center; overflow-x:auto; scrollbar-width:none; padding:2px 0}
+  .dtabbar::-webkit-scrollbar{display:none}
+  .dtabs{display:flex; align-items:center; gap:4px}
   .dtabs:empty{display:none}
   .dtab{display:inline-flex; align-items:center; max-width:200px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); flex-shrink:0}
   .dtab.cur{background:var(--accent-soft); border-color:color-mix(in srgb, var(--accent) 40%, transparent)}
@@ -138,6 +140,7 @@
   .dtab-x{background:none; border:none; color:var(--muted); font-size:calc(16px * var(--fs)); line-height:1; padding:4px 7px 5px; margin-right:2px; border-radius:6px}
   .dtab-x:hover{color:var(--ink); background:color-mix(in srgb, var(--ink) 10%, transparent)}
   .dtab-new{background:none; border:1px dashed var(--line); color:var(--muted); font-size:calc(16px * var(--fs)); line-height:1; width:30px; height:30px; border-radius:8px; margin-left:4px; flex-shrink:0}
+  .dtabs:empty + .dtab-new{margin-left:0}
   .dtab-new:hover{color:var(--accent); border-color:var(--accent)}
   @media (max-width:560px){ .appbar-in{gap:0} .brand{padding:12px 0 0} .appsw, .beta{margin-top:12px} .tabs{flex-basis:100%} .tab{padding:10px 10px 11px} }
 
@@ -165,7 +168,7 @@
   /* ---------- Write: the document bar, the formatting bar, the page ---------- */
   .bars{position:sticky; top:0; z-index:30; background:var(--surface); border-bottom:1px solid var(--line); box-shadow:0 1px 0 rgba(0,0,0,.02)}
   .docbar{display:flex; align-items:center; gap:10px; padding:8px 16px 4px; flex-wrap:wrap}
-  .docname{flex:1 1 220px; min-width:0; font:inherit; font-size:calc(17px * var(--fs)); font-weight:650; letter-spacing:-.01em; color:var(--ink);
+  .docname{flex:0 1 240px; min-width:120px; font:inherit; font-size:calc(17px * var(--fs)); font-weight:650; letter-spacing:-.01em; color:var(--ink);
     background:transparent; border:1px solid transparent; border-radius:8px; padding:5px 8px; margin-left:-8px}
   .docname:hover{border-color:var(--line)}
   .docname:focus{border-color:var(--accent); outline:none; background:var(--surface-2)}
@@ -409,8 +412,6 @@
     <nav class="tabs" aria-label="Main">
       <button class="tab" type="button" data-tab="write" aria-current="page">Write</button>
       <button class="tab" type="button" data-tab="docs">Documents</button>
-      <span class="dtabs" id="docTabs" role="group" aria-label="Open documents"></span>
-      <button class="dtab-new" id="tabNewBtn" type="button" aria-label="New document" title="New document">+</button>
       <span class="push" aria-hidden="true"></span>
       <button class="tab" type="button" data-tab="help">Help</button>
       <button class="tab icon" type="button" data-tab="settings" aria-label="Settings" title="Settings">
@@ -426,6 +427,10 @@
   <div class="bars" id="bars">
     <div class="docbar">
       <input class="docname" id="docName" type="text" autocomplete="off" spellcheck="false" aria-label="Document name" placeholder="Untitled">
+      <div class="dtabbar">
+        <span class="dtabs" id="docTabs" role="group" aria-label="Open documents"></span>
+        <button class="dtab-new" id="tabNewBtn" type="button" aria-label="New document" title="New document">+</button>
+      </div>
       <span class="savestate" id="saveState" aria-live="polite"></span>
       <div class="seg" id="modeSeg" role="group" aria-label="View">
         <button type="button" data-mode="live" aria-pressed="true" title="Live preview: Markdown renders as you write (Ctrl+/ to switch)">Live</button>
@@ -564,7 +569,7 @@
       <ul>
         <li>RunDown saves as you type. The note next to the name says when it last saved.</li>
         <li>The name at the top is optional: without one, the first line of the document names it.</li>
-        <li><b>Tabs.</b> Each document you open gets a tab next to Documents, so you can switch between several. <b>+</b> starts a new one, and &times; (or a middle click) closes a tab without deleting anything: the document stays on the Documents page. Open tabs come back when you return, and each keeps its undo history while you switch.</li>
+        <li><b>Tabs.</b> Each document you open gets a tab next to its name at the top of the page, so you can switch between several. On a computer the tabs stay in view while you scroll. <b>+</b> starts a new one, and &times; (or a middle click) closes a tab without deleting anything: the document stays on the Documents page. Open tabs come back when you return, and each keeps its undo history while you switch.</li>
         <li><b>Documents</b> lists everything you've written, newest first, with search once you have a few. Each one can be downloaded, duplicated or deleted there.</li>
         <li>Import <code>.md</code> or <code>.txt</code> files on the Documents page, or drop one onto the page while you write.</li>
         <li>Settings &rsaquo; Data &rsaquo; <b>Export all</b> saves every document (and its pictures) in one backup file. Import it on another device or browser to bring everything across.</li>
@@ -589,6 +594,8 @@
 
       <h2 id="help-whatsnew">What's new</h2>
       <dl class="versions">
+        <dt>v1.0.2 &middot; October 2026</dt>
+        <dd>Tabs moved next to the document's name, so they stay in reach while you scroll. Write and Documents stay in the top bar.</dd>
         <dt>v1.0.1 &middot; October 2026</dt>
         <dd>Tabs: open several documents at once and switch between them next to Documents. RunDown is blue now: a blue icon, blue in the study apps menu, and blue as the default accent color (pick another, teal included, in Settings &gt; Appearance). The page is wider, and a table wider than the page scrolls sideways instead of running off it.</dd>
         <dt>v1.0 &middot; October 2026</dt>
@@ -661,7 +668,7 @@
 (function(){
   "use strict";
 
-  var APP_VERSION = "1.0.1";
+  var APP_VERSION = "1.0.2";
   var NS = "runDown:";   // every GitHub Pages project of this user shares one origin, so namespace every key
   var el = function(id){ return document.getElementById(id); };
   var IS_MAC = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent || "");
@@ -2332,7 +2339,7 @@
     window.scrollTo(0, 0);
     if (focus && viewMode !== "read"){ ed.focus({ preventScroll: true }); edFocused = true; render(); ensureCaretVisible(); }
   }
-  /* ---------- Open documents as tabs: after Documents in the app bar, kept in localStorage runDown:tabs ---------- */
+  /* ---------- Open documents as tabs: next to the name in the sticky bar above the page, kept in localStorage runDown:tabs ---------- */
   var TABS = [], UNDO = {};   // UNDO: doc id -> { u, r, text }, the undo history of a tab that isn't showing
   function saveTabs(){ try { localStorage.setItem(NS + "tabs", JSON.stringify(TABS)); } catch (e){} }
   function loadTabs(){
@@ -2353,26 +2360,36 @@
       else { renderTabs(); show("docsScreen"); }   // the last tab: Write reopens it
     } else renderTabs();
   }
+  // Tabs are updated in place, never rebuilt: clicking one blurs the page, which saves and calls this between the
+  // mousedown and the mouseup, and a replaced button would swallow the click (it took a second click to switch).
+  var tabEls = {};   // doc id -> its .dtab element
+  function makeTab(id){
+    var t = document.createElement("span"); t.className = "dtab";
+    var b = document.createElement("button"); b.type = "button"; b.className = "dtab-name";
+    b.addEventListener("click", function(){ if (id === curId) focusWrite(); else openDoc(id, true); });
+    var x = document.createElement("button"); x.type = "button"; x.className = "dtab-x"; x.innerHTML = "&times;"; x.title = "Close";
+    x.addEventListener("click", function(e){ e.stopPropagation(); closeTab(id); });
+    t.addEventListener("auxclick", function(e){ if (e.button === 1){ e.preventDefault(); closeTab(id); } });   // middle click closes
+    t.appendChild(b); t.appendChild(x);
+    return t;
+  }
   function renderTabs(){
-    var box = el("docTabs"), onWrite = !el("writeScreen").classList.contains("hidden");
-    box.innerHTML = "";
+    var box = el("docTabs"), onWrite = !el("writeScreen").classList.contains("hidden"), live = {}, i = 0;
     TABS.forEach(function(id){
       var d = DOCS[id]; if (!d) return;
-      var t = document.createElement("span"), cur = id === curId && onWrite;
-      t.className = "dtab" + (cur ? " cur" : "");
-      var b = document.createElement("button"); b.type = "button"; b.className = "dtab-name"; b.textContent = docTitle(d); b.title = docTitle(d);
-      if (cur) b.setAttribute("aria-current", "page");
-      b.addEventListener("click", function(){ if (id === curId) focusWrite(); else openDoc(id, true); });
-      var x = document.createElement("button"); x.type = "button"; x.className = "dtab-x"; x.innerHTML = "&times;";
-      x.setAttribute("aria-label", "Close " + docTitle(d)); x.title = "Close";
-      x.addEventListener("click", function(e){ e.stopPropagation(); closeTab(id); });
-      t.addEventListener("auxclick", function(e){ if (e.button === 1){ e.preventDefault(); closeTab(id); } });   // middle click closes
-      t.appendChild(b); t.appendChild(x); box.appendChild(t);
-      if (cur){   // keep the current tab in view inside the app bar, without scrolling the page
+      var t = tabEls[id] || (tabEls[id] = makeTab(id)), b = t.firstChild, cur = id === curId && onWrite, title = docTitle(d);
+      live[id] = 1;
+      t.classList.toggle("cur", cur);
+      if (b.textContent !== title){ b.textContent = title; b.title = title; t.lastChild.setAttribute("aria-label", "Close " + title); }
+      if (cur) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+      if (box.children[i] !== t) box.insertBefore(t, box.children[i] || null);
+      i++;
+      if (cur){   // keep the current tab in view inside the tab strip, without scrolling the page
         var nav = box.parentNode, r = t.getBoundingClientRect(), n = nav.getBoundingClientRect();
         if (r.left < n.left) nav.scrollLeft -= n.left - r.left + 8; else if (r.right > n.right) nav.scrollLeft += r.right - n.right + 8;
       }
     });
+    Object.keys(tabEls).forEach(function(id){ if (!live[id]){ if (tabEls[id].parentNode) box.removeChild(tabEls[id]); delete tabEls[id]; } });
   }
   function focusWrite(){ show("writeScreen"); focusEditor(); }
   function sortedDocs(){ return Object.keys(DOCS).map(function(k){ return DOCS[k]; }).sort(function(a, b){ return b.updatedAt - a.updatedAt; }); }
