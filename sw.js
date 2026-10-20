@@ -9,7 +9,7 @@
  * - Cache names start with "runDown-": every GitHub Pages project of this user shares the origin.
  */
 "use strict";
-const VERSION = "ddae752a7bde"; // generated: tools/sw_version.py --sync
+const VERSION = "ce61b61eea0e"; // generated: tools/sw_version.py --sync
 const CACHE = "runDown-" + VERSION;
 const PRECACHE = [
   "./",

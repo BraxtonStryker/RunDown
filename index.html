@@ -569,7 +569,7 @@
       <ul>
         <li>RunDown saves as you type. The note next to the name says when it last saved.</li>
         <li>The name at the top is optional: without one, the first line of the document names it.</li>
-        <li><b>Tabs.</b> Each document you open gets a tab next to its name at the top of the page, so you can switch between several. On a computer the tabs stay in view while you scroll. <b>+</b> starts a new one, and &times; (or a middle click) closes a tab without deleting anything: the document stays on the Documents page. Open tabs come back when you return, and each keeps its undo history while you switch.</li>
+        <li><b>Tabs.</b> Each document you open gets a tab next to its name at the top of the page, so you can switch between several. On a computer the tabs stay in view while you scroll. <b>+</b> starts a new one, and &times; (or a middle click) closes a tab without deleting anything: the document stays on the Documents page. Open tabs come back when you return. While you switch, each tab keeps your place on the page, your cursor and its undo history.</li>
         <li><b>Documents</b> lists everything you've written, newest first, with search once you have a few. Each one can be downloaded, duplicated or deleted there.</li>
         <li>Import <code>.md</code> or <code>.txt</code> files on the Documents page, or drop one onto the page while you write.</li>
         <li>Settings &rsaquo; Data &rsaquo; <b>Export all</b> saves every document (and its pictures) in one backup file. Import it on another device or browser to bring everything across.</li>
@@ -594,6 +594,8 @@
 
       <h2 id="help-whatsnew">What's new</h2>
       <dl class="versions">
+        <dt>v1.0.3 &middot; October 2026</dt>
+        <dd>Switching tabs, or going to Documents and back, returns you to where you were in each document, with your cursor where you left it, instead of jumping to the top.</dd>
         <dt>v1.0.2 &middot; October 2026</dt>
         <dd>Tabs moved next to the document's name, so they stay in reach while you scroll. Write and Documents stay in the top bar.</dd>
         <dt>v1.0.1 &middot; October 2026</dt>
@@ -668,7 +670,7 @@
 (function(){
   "use strict";
 
-  var APP_VERSION = "1.0.2";
+  var APP_VERSION = "1.0.3";
   var NS = "runDown:";   // every GitHub Pages project of this user shares one origin, so namespace every key
   var el = function(id){ return document.getElementById(id); };
   var IS_MAC = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent || "");
@@ -2319,7 +2321,7 @@
     return d;
   }
   function openDoc(id, focus){
-    if (curId && DOCS[curId] && curId !== id){ flushSave(); UNDO[curId] = { u: undoStack, r: redoStack, text: src }; }
+    if (curId && DOCS[curId] && curId !== id){ captureView(curId); flushSave(); UNDO[curId] = { u: undoStack, r: redoStack, text: src }; }
     var d = DOCS[id]; if (!d) return;
     curId = id;
     try { localStorage.setItem(NS + "last", id); } catch (e){}
@@ -2328,7 +2330,8 @@
     undoStack = keep ? keep.u : []; redoStack = keep ? keep.r : [];
     delete UNDO[id];
     addTab(id);
-    var c = Math.max(0, Math.min(d.caret || 0, src.length)); sel = { a: c, f: c };
+    var c = Math.max(0, Math.min(d.caret || 0, src.length)), v = VIEW[id];
+    sel = v ? { a: Math.min(v.sel.a, src.length), f: Math.min(v.sel.f, src.length) } : { a: c, f: c };
     el("docName").value = d.name || ""; el("docName").placeholder = autoTitle(d.text) || "Untitled";
     document.title = docTitle(d) + " - RunDown";
     setSaveState("");
@@ -2336,9 +2339,36 @@
     if (findState.open) runFind(false);
     render(); updateToolbar();
     show("writeScreen");
-    window.scrollTo(0, 0);
-    if (focus && viewMode !== "read"){ ed.focus({ preventScroll: true }); edFocused = true; render(); ensureCaretVisible(); }
+    if (focus && viewMode !== "read"){ ed.focus({ preventScroll: true }); edFocused = true; render(); }
+    if (!restoreView(id) && focus && viewMode !== "read") ensureCaretVisible();
   }
+  // Where each open document was: the first line showing under the bars (and how far down the screen it sat), the
+  // scroll offset as a fallback, and the selection. Switching tabs, or Documents and back, returns there. Kept in memory.
+  var VIEW = {}, viewTok = 0, viewUserScrolled = false;
+  function captureView(id){
+    if (!id || el("writeScreen").classList.contains("hidden")) return;
+    var top = el("bars").getBoundingClientRect().bottom, anchor = null;
+    for (var i = 0; i < lineEls.length; i++){
+      var d = lineEls[i]; if (!d || !d.getClientRects().length) continue;
+      var r = d.getBoundingClientRect(); if (r.bottom > top){ anchor = { l: i, off: r.top }; break; }
+    }
+    VIEW[id] = { y: window.scrollY, anchor: anchor, sel: { a: sel.a, f: sel.f } };
+  }
+  function restoreView(id){
+    var v = VIEW[id], tok = ++viewTok;
+    if (!v){ window.scrollTo(0, 0); return false; }
+    var go = function(){
+      if (tok !== viewTok || viewUserScrolled || curId !== id) return;
+      var d = v.anchor && lineEls[v.anchor.l];
+      if (d && d.isConnected && d.getClientRects().length) window.scrollTo(0, window.scrollY + d.getBoundingClientRect().top - v.anchor.off);
+      else window.scrollTo(0, v.y);
+    };
+    viewUserScrolled = false; go();
+    // pictures and formulas can still change heights after this, so settle again for a moment unless the reader scrolls first
+    requestAnimationFrame(go); [150, 500, 1200].forEach(function(ms){ setTimeout(go, ms); });
+    return true;
+  }
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach(function(t){ window.addEventListener(t, function(){ viewUserScrolled = true; }, { passive: true, capture: true }); });
   /* ---------- Open documents as tabs: next to the name in the sticky bar above the page, kept in localStorage runDown:tabs ---------- */
   var TABS = [], UNDO = {};   // UNDO: doc id -> { u, r, text }, the undo history of a tab that isn't showing
   function saveTabs(){ try { localStorage.setItem(NS + "tabs", JSON.stringify(TABS)); } catch (e){} }
@@ -2353,12 +2383,13 @@
   function closeTab(id){
     var at = TABS.indexOf(id); if (at < 0) return;
     if (id === curId) flushSave();
-    TABS.splice(at, 1); delete UNDO[id]; saveTabs();
+    TABS.splice(at, 1); saveTabs();
     if (id === curId){
       var next = TABS[Math.min(at, TABS.length - 1)];
       if (next) openDoc(next, true);
       else { renderTabs(); show("docsScreen"); }   // the last tab: Write reopens it
     } else renderTabs();
+    delete UNDO[id]; delete VIEW[id];   // after switching away, which stashes both for the tab it leaves
   }
   // Tabs are updated in place, never rebuilt: clicking one blurs the page, which saves and calls this between the
   // mousedown and the mouseup, and a replaced button would swallow the click (it took a second click to switch).
@@ -2420,7 +2451,7 @@
   }
   function deleteDoc(d){
     if (!window.confirm("Delete \u201C" + docTitle(d) + "\u201D?\n\nThis can't be undone. Download it first if you want a copy.")) return;
-    delete DOCS[d.id]; delRecord("docs", d.id); delete UNDO[d.id];
+    delete DOCS[d.id]; delRecord("docs", d.id); delete UNDO[d.id]; delete VIEW[d.id];
     pruneAssets();
     var at = TABS.indexOf(d.id); if (at >= 0){ TABS.splice(at, 1); saveTabs(); }
     if (curId === d.id){ curId = null; var next = TABS[Math.min(at, TABS.length - 1)] || (sortedDocs()[0] || {}).id; openDoc(next || newDoc("").id, false); show("docsScreen"); }
@@ -2536,7 +2567,8 @@
   var SCREENS = ["writeScreen", "docsScreen", "helpScreen", "settingsScreen"];
   var TAB_OF = { writeScreen: "write", docsScreen: "docs", helpScreen: "help", settingsScreen: "settings" };
   function show(id){
-    if (id !== "writeScreen") flushSave();
+    var wasWrite = !el("writeScreen").classList.contains("hidden");
+    if (id !== "writeScreen"){ if (wasWrite) captureView(curId); flushSave(); }
     SCREENS.forEach(function(s){ el(s).classList.toggle("hidden", s !== id); });
     Array.prototype.forEach.call(document.querySelectorAll(".tab"), function(t){
       if (t.getAttribute("data-tab") === TAB_OF[id]) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current");
@@ -2547,6 +2579,7 @@
     if (id === "settingsScreen") renderSettings();
     if (id === "docsScreen") renderDocs();
     if (id === "writeScreen" && curId && DOCS[curId]) addTab(curId); else renderTabs();
+    if (id === "writeScreen" && !wasWrite && curId) restoreView(curId);
   }
   // Browser Back returns to the page instead of leaving the app (as in QuizQrusher)
   var ignorePop = false;
