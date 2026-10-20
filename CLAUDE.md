@@ -1,6 +1,6 @@
 # RunDown
 
-A Markdown word processor with live preview: the text being edited inside a piece of Markdown is plain, and it renders the moment that piece is closed. Part of the study apps at https://braxtonstryker.github.io/ (with QuizQrusher in `../Quiz_Qrusher/`, InfoBase in `../Class_Base/` and CwikCard in `../CwikCard/`). Hosted on GitHub Pages at `/RunDown/` (repo `BraxtonStryker/RunDown`). **v1.0.0** built 2026-10-18 (Beta tag next to the name, like InfoBase and CwikCard).
+A Markdown word processor with live preview: the text being edited inside a piece of Markdown is plain, and it renders the moment that piece is closed. Part of the study apps at https://braxtonstryker.github.io/ (with QuizQrusher in `../Quiz_Qrusher/`, InfoBase in `../Class_Base/` and CwikCard in `../CwikCard/`). Hosted on GitHub Pages at `/RunDown/` (repo `BraxtonStryker/RunDown`). **v1.0.1** (2026-10-20: document tabs, blue instead of teal for the accent, icon and app switcher, wider page, sideways-scrolling tables). v1.0.0 built 2026-10-18 (Beta tag next to the name, like InfoBase and CwikCard).
 
 ## Layout
 - `index.html`: the whole app. `sw.js`, `manifest.webmanifest`, `icons/` (`icon.svg` and `icon-maskable.svg` are the sources of the PNGs, rendered with headless Chrome): the installable offline app. `vendor/katex.min.js` is the same KaTeX build InfoBase uses (`Class_Base/studydb/web/vendor/`); it is loaded on demand and renders MathML only, so no KaTeX CSS or fonts are needed.
@@ -9,7 +9,7 @@ A Markdown word processor with live preview: the text being edited inside a piec
 
 ## Conventions (match QuizQrusher and CwikCard)
 - Single-file HTML, inline CSS and JS, vanilla JS in an IIFE, `var` and `function` style, no frameworks, no build step, nothing from CDNs (the Atkinson Hyperlegible font is inlined from CwikCard).
-- Every color is a CSS custom property on `:root`, with dark values for "Match system" and `data-theme="dark"`. Font sizes are `calc(Npx * var(--fs))`. Teal (`#0F766E` / `#2DD4BF`) is RunDown's color.
+- Every color is a CSS custom property on `:root`, with dark values for "Match system" and `data-theme="dark"`. Font sizes are `calc(Npx * var(--fs))`. Blue is RunDown's color (since v1.0.1; it was teal): the default accent (`#1D4ED8` / `#6EA8FE`, the Blue preset), the app switcher entry, and the icon (gradient `#2F6BEA` to `#1E40AF`, details `#1D4ED8`).
 - American spelling. Every localStorage, IndexedDB and cache name starts with `runDown` (`runDown:settings`, `runDown:last`, IndexedDB `runDown:app`, caches `runDown-<version>`): all of the user's GitHub Pages apps share one origin.
 - Copied from QuizQrusher/CwikCard and kept in step by hand: the appearance block in `<head>`, the storage backends, Settings rows, the toast, the app switcher and the service worker. The app switcher is the same menu in all four apps (QuizQrusher, InfoBase, CwikCard, RunDown) with the four-square Home icon; keep them in step. Hidden from `file://`.
 - Log each release in Help > What's new and bump `APP_VERSION`.

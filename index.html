@@ -11,7 +11,7 @@
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<meta name="theme-color" content="#0F766E" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1D4ED8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161C25" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-title" content="RunDown">
 <meta name="description" content="A Markdown word processor that renders as you write. Offline, private, with math, tables, tasks and export to HTML or PDF.">
@@ -20,7 +20,7 @@
     color-scheme:light;
     --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F6F8FB;
     --ink:#131A24; --muted:#616B7A; --line:#E2E7EE; --line-2:#CBD3DE;
-    --accent:#0F766E; --accent-hover:#0B5F59; --accent-soft:#E1F3F1;
+    --accent:#1D4ED8; --accent-hover:#1E40AF; --accent-soft:#E6EEFD;
     --good:#0F9D74; --good-soft:#E4F5EF;
     --bad:#DC4B54; --bad-soft:#FBEAEB;
     --warn:#A76A00; --warn-soft:#FBF1DC;
@@ -31,8 +31,8 @@
     --shadow:0 1px 2px rgba(19,26,36,.06), 0 8px 24px rgba(19,26,36,.06);
     --shadow-knob:0 1px 3px rgba(0,0,0,.3);
     --overlay:rgba(10,14,20,.55);
-    --fs:1; --lh:1; --pw:820px;              /* text size, line spacing and page width (Settings) */
-    --app-qq:#4338CA; --app-ib:#1E7A4C; --app-cc:#C2410C; --app-rd:#0F766E;  /* each study app's own color, for the app switcher */
+    --fs:1; --lh:1; --pw:980px;              /* text size, line spacing and page width (Settings) */
+    --app-qq:#4338CA; --app-ib:#1E7A4C; --app-cc:#C2410C; --app-rd:#1D4ED8;  /* each study app's own color, for the app switcher */
     --font-body:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     --font-mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
     --font-doc:var(--font-body);
@@ -42,14 +42,14 @@
       color-scheme:dark;
         --bg:#0E1218; --surface:#161C25; --surface-2:#1C2531;
         --ink:#E8ECF2; --muted:#96A0AD; --line:#263140; --line-2:#344257;
-        --accent:#2DD4BF; --accent-hover:#5EEAD4; --accent-soft:#0F2A28;
+        --accent:#6EA8FE; --accent-hover:#8DBBFF; --accent-soft:#16243A;
         --good:#34C79A; --good-soft:#12271F;
         --bad:#F0757C; --bad-soft:#2A1618;
         --warn:#E7B04A; --warn-soft:#2B2210;
-        --on-accent:#062221;
+        --on-accent:#0B1220;
         --knob:#F4F6FA;
         --code-bg:#1C2531; --mark:#5B4A12; --qbar:#344257; --find:#5A3B12; --find-cur:#B7791F;
-        --app-qq:#8B87FF; --app-ib:#6FD3A0; --app-cc:#FB923C; --app-rd:#2DD4BF;
+        --app-qq:#8B87FF; --app-ib:#6FD3A0; --app-cc:#FB923C; --app-rd:#6EA8FE;
         --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
     }
   }
@@ -57,14 +57,14 @@
     color-scheme:dark;
       --bg:#0E1218; --surface:#161C25; --surface-2:#1C2531;
       --ink:#E8ECF2; --muted:#96A0AD; --line:#263140; --line-2:#344257;
-      --accent:#2DD4BF; --accent-hover:#5EEAD4; --accent-soft:#0F2A28;
+      --accent:#6EA8FE; --accent-hover:#8DBBFF; --accent-soft:#16243A;
       --good:#34C79A; --good-soft:#12271F;
       --bad:#F0757C; --bad-soft:#2A1618;
       --warn:#E7B04A; --warn-soft:#2B2210;
-      --on-accent:#062221;
+      --on-accent:#0B1220;
       --knob:#F4F6FA;
       --code-bg:#1C2531; --mark:#5B4A12; --qbar:#344257; --find:#5A3B12; --find-cur:#B7791F;
-      --app-qq:#8B87FF; --app-ib:#6FD3A0; --app-cc:#FB923C; --app-rd:#2DD4BF;
+      --app-qq:#8B87FF; --app-ib:#6FD3A0; --app-cc:#FB923C; --app-rd:#6EA8FE;
       --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
   }
   /* fonts (Settings > Text). Atkinson Hyperlegible: Copyright 2020 Braille Institute of America, Inc.,
@@ -74,7 +74,7 @@
   :root[data-font="serif"]{--font-doc:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif}
   :root[data-font="atkinson"]{--font-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; --font-doc:var(--font-body)}
   :root[data-font="mono"]{--font-doc:var(--font-mono)}
-  :root[data-width="narrow"]{--pw:680px} :root[data-width="wide"]{--pw:1040px} :root[data-width="full"]{--pw:100%}
+  :root[data-width="narrow"]{--pw:720px} :root[data-width="wide"]{--pw:1280px} :root[data-width="full"]{--pw:100%}
   @media (prefers-reduced-motion: reduce){ *, *::before, *::after{transition:none !important; animation:none !important; scroll-behavior:auto !important} }
   :root[data-motion="reduce"] *, :root[data-motion="reduce"] *::before, :root[data-motion="reduce"] *::after{transition:none !important; animation:none !important; scroll-behavior:auto !important}
   *{box-sizing:border-box}
@@ -127,6 +127,18 @@
   .tab[aria-current="page"]{color:var(--accent); border-bottom-color:var(--accent)}
   .tab.icon{display:inline-grid; place-items:center; padding:12px 10px 10px}
   .tab.icon svg{width:20px; height:20px}
+  /* Open documents: a closable tab each, after Documents */
+  .dtabs{display:flex; align-items:center; gap:4px; margin-left:6px}
+  .dtabs:empty{display:none}
+  .dtab{display:inline-flex; align-items:center; max-width:200px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); flex-shrink:0}
+  .dtab.cur{background:var(--accent-soft); border-color:color-mix(in srgb, var(--accent) 40%, transparent)}
+  .dtab-name{background:none; border:none; color:var(--muted); font-size:calc(13.5px * var(--fs)); font-weight:600; padding:6px 2px 6px 10px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .dtab-name:hover, .dtab.cur .dtab-name{color:var(--ink)}
+  .dtab.cur .dtab-name{color:var(--accent)}
+  .dtab-x{background:none; border:none; color:var(--muted); font-size:calc(16px * var(--fs)); line-height:1; padding:4px 7px 5px; margin-right:2px; border-radius:6px}
+  .dtab-x:hover{color:var(--ink); background:color-mix(in srgb, var(--ink) 10%, transparent)}
+  .dtab-new{background:none; border:1px dashed var(--line); color:var(--muted); font-size:calc(16px * var(--fs)); line-height:1; width:30px; height:30px; border-radius:8px; margin-left:4px; flex-shrink:0}
+  .dtab-new:hover{color:var(--accent); border-color:var(--accent)}
   @media (max-width:560px){ .appbar-in{gap:0} .brand{padding:12px 0 0} .appsw, .beta{margin-top:12px} .tabs{flex-basis:100%} .tab{padding:10px 10px 11px} }
 
   /* ---------- App switcher: the down arrow before the logotype opens a menu of the study apps, with Home last ---------- */
@@ -240,7 +252,8 @@
   .ed .mprev{display:block; text-align:center; overflow-x:auto; padding:.4em; margin:.2em 0 .4em; border:1px dashed var(--line-2); border-radius:8px; user-select:none}
   .ed .mprev math{font-size:1.1em}
   .ed .merr{color:var(--bad); font-family:var(--font-mono); font-size:.85em}
-  .ed .blk.tbl.on{display:table; border-collapse:collapse; margin:.45em 0; max-width:100%}
+  /* a block that scrolls sideways, around the anonymous table its rows make, so a wide table stays on the page */
+  .ed .blk.tbl.on{display:block; overflow-x:auto; border-collapse:collapse; margin:.45em 0; max-width:100%}
   .ed .blk.tbl.on > .ln{display:table-row}
   .ed .blk.tbl.on > .ln.x{display:none}
   .ed .td{display:table-cell; border:1px solid var(--line-2); padding:5px 12px; vertical-align:top; min-width:3em; white-space:pre-wrap}
@@ -338,7 +351,7 @@
 </style>
 <script>
 /* Appearance, applied before the first paint. Copied from QuizQrusher's QQ-SHARED:appearance block (via CwikCard), with RunDown's
-   own settings key, teal as the default accent, a monospace font and the page width. */
+   own settings key, blue as the default accent, a monospace font and the page width. */
 (function(){
   "use strict";
   // Accent presets: [accent, hover, soft, text-on-accent] for light and dark themes (the same as QuizQrusher's)
@@ -359,7 +372,7 @@
     var theme = s.theme === "light" || s.theme === "dark" ? s.theme : "system";
     if (theme === "system") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", theme);
     var dark = theme === "dark" || (theme === "system" && !!(mq && mq.matches));
-    var a = (ACCENTS[s.accent] || ACCENTS.teal)[dark ? "dark" : "light"];
+    var a = (ACCENTS[s.accent] || ACCENTS.blue)[dark ? "dark" : "light"];
     st.setProperty("--accent", a[0]); st.setProperty("--accent-hover", a[1]); st.setProperty("--accent-soft", a[2]); st.setProperty("--on-accent", a[3]);
     st.setProperty("--fs", String(+s.textScale || 1));
     st.setProperty("--lh", String(+s.lineSpacing || 1));
@@ -386,8 +399,8 @@
           <a class="appsw-item qq" role="menuitem" href="../Quiz_Qrusher/"><svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="swqq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5145E6"/><stop offset="1" stop-color="#3A31B8"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#swqq)"/><g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"><circle cx="246" cy="240" r="153" stroke-width="50"/><path d="M368 336L430 378" stroke-width="54"/><path d="M190 244L232 288L304 200" stroke-width="34"/></g></svg><span>Quiz<b>Qrusher</b></span></a>
           <a class="appsw-item ib" role="menuitem" href="../Class_Base/"><svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="swib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24935C"/><stop offset="1" stop-color="#16603B"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#swib)"/><rect x="132" y="92" width="268" height="190" rx="24" fill="#FFFFFF" fill-opacity=".42"/><rect x="92" y="130" width="282" height="206" rx="26" fill="#FFFFFF"/><path d="M136 186H290M136 230H252M136 274H214" fill="none" stroke="#1B7047" stroke-width="22" stroke-linecap="round"/><circle cx="338" cy="326" r="70" fill="#1B7047" stroke="#FFFFFF" stroke-width="30"/><path d="M392 380L432 420" fill="none" stroke="#FFFFFF" stroke-width="42" stroke-linecap="round"/></svg><span>Info<b>Base</b></span></a>
           <a class="appsw-item cc" role="menuitem" href="../CwikCard/"><svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="swcc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F26B1D"/><stop offset="1" stop-color="#B83A0A"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#swcc)"/><rect x="168" y="92" width="232" height="300" rx="30" fill="#FFFFFF" fill-opacity=".42" transform="rotate(12 284 242)"/><g transform="rotate(-6 236 268)"><rect x="120" y="118" width="232" height="300" rx="30" fill="#FFFFFF"/><path d="M262 166L192 290H240L218 372L290 244H242Z" fill="#C2410C"/></g></svg><span>Cwik<b>Card</b></span></a>
-          <a class="appsw-item rd" role="menuitem" href="../RunDown/" aria-current="page"><svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="swrd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14A394"/><stop offset="1" stop-color="#0B5F59"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#swrd)"/><rect x="104" y="84" width="256" height="328" rx="30" fill="#FFFFFF"/><path d="M152 156H272" stroke="#0F766E" stroke-width="32" stroke-linecap="round"/><path d="M152 222H312M152 276H286M152 330H230" stroke="#0F766E" stroke-opacity=".5" stroke-width="22" stroke-linecap="round"/><circle cx="356" cy="360" r="82" fill="#0F766E" stroke="#FFFFFF" stroke-width="28"/><path d="M356 314V398M322 366L356 400L390 366" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Run<b>Down</b></span></a>
-          <a class="appsw-home" role="menuitem" href="../"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#131A24"/><rect x="14" y="14" width="16" height="16" rx="4" fill="#5145E6"/><rect x="34" y="14" width="16" height="16" rx="4" fill="#24935C"/><rect x="14" y="34" width="16" height="16" rx="4" fill="#E8611A"/><rect x="34" y="34" width="16" height="16" rx="4" fill="#14A394"/></svg><span>Home<small>All study apps</small></span></a>
+          <a class="appsw-item rd" role="menuitem" href="../RunDown/" aria-current="page"><svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="swrd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F6BEA"/><stop offset="1" stop-color="#1E40AF"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#swrd)"/><rect x="104" y="84" width="256" height="328" rx="30" fill="#FFFFFF"/><path d="M152 156H272" stroke="#1D4ED8" stroke-width="32" stroke-linecap="round"/><path d="M152 222H312M152 276H286M152 330H230" stroke="#1D4ED8" stroke-opacity=".5" stroke-width="22" stroke-linecap="round"/><circle cx="356" cy="360" r="82" fill="#1D4ED8" stroke="#FFFFFF" stroke-width="28"/><path d="M356 314V398M322 366L356 400L390 366" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Run<b>Down</b></span></a>
+          <a class="appsw-home" role="menuitem" href="../"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#131A24"/><rect x="14" y="14" width="16" height="16" rx="4" fill="#5145E6"/><rect x="34" y="14" width="16" height="16" rx="4" fill="#24935C"/><rect x="14" y="34" width="16" height="16" rx="4" fill="#E8611A"/><rect x="34" y="34" width="16" height="16" rx="4" fill="#2F6BEA"/></svg><span>Home<small>All study apps</small></span></a>
         </div>
       </div>
       <button class="brand" type="button" data-tab="write">Run<span>Down</span></button>
@@ -396,6 +409,8 @@
     <nav class="tabs" aria-label="Main">
       <button class="tab" type="button" data-tab="write" aria-current="page">Write</button>
       <button class="tab" type="button" data-tab="docs">Documents</button>
+      <span class="dtabs" id="docTabs" role="group" aria-label="Open documents"></span>
+      <button class="dtab-new" id="tabNewBtn" type="button" aria-label="New document" title="New document">+</button>
       <span class="push" aria-hidden="true"></span>
       <button class="tab" type="button" data-tab="help">Help</button>
       <button class="tab icon" type="button" data-tab="settings" aria-label="Settings" title="Settings">
@@ -549,6 +564,7 @@
       <ul>
         <li>RunDown saves as you type. The note next to the name says when it last saved.</li>
         <li>The name at the top is optional: without one, the first line of the document names it.</li>
+        <li><b>Tabs.</b> Each document you open gets a tab next to Documents, so you can switch between several. <b>+</b> starts a new one, and &times; (or a middle click) closes a tab without deleting anything: the document stays on the Documents page. Open tabs come back when you return, and each keeps its undo history while you switch.</li>
         <li><b>Documents</b> lists everything you've written, newest first, with search once you have a few. Each one can be downloaded, duplicated or deleted there.</li>
         <li>Import <code>.md</code> or <code>.txt</code> files on the Documents page, or drop one onto the page while you write.</li>
         <li>Settings &rsaquo; Data &rsaquo; <b>Export all</b> saves every document (and its pictures) in one backup file. Import it on another device or browser to bring everything across.</li>
@@ -573,6 +589,8 @@
 
       <h2 id="help-whatsnew">What's new</h2>
       <dl class="versions">
+        <dt>v1.0.1 &middot; October 2026</dt>
+        <dd>Tabs: open several documents at once and switch between them next to Documents. RunDown is blue now: a blue icon, blue in the study apps menu, and blue as the default accent color (pick another, teal included, in Settings &gt; Appearance). The page is wider, and a table wider than the page scrolls sideways instead of running off it.</dd>
         <dt>v1.0 &middot; October 2026</dt>
         <dd>The first version: a Markdown word processor with live preview (plain while you edit inside a piece of Markdown, rendered the moment it closes), Source and Read views, headings, emphasis, highlight, links, pictures, lists, checklists, quotes, code blocks, tables and LaTeX math, a formatting toolbar and shortcuts, find and replace, an outline, documents saved in the browser, import, export to Markdown, HTML, PDF and formatted text, Settings, and an installable app that works offline.</dd>
       </dl>
@@ -643,7 +661,7 @@
 (function(){
   "use strict";
 
-  var APP_VERSION = "1.0.0";
+  var APP_VERSION = "1.0.1";
   var NS = "runDown:";   // every GitHub Pages project of this user shares one origin, so namespace every key
   var el = function(id){ return document.getElementById(id); };
   var IS_MAC = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent || "");
@@ -651,7 +669,7 @@
 
   /* ---------- Settings: localStorage runDown:settings, missing keys fall back to the defaults ---------- */
   var SETTINGS_DEFAULTS = {
-    theme: "system", accent: "teal", reduceMotion: false,                                   // Appearance
+    theme: "system", accent: "blue", reduceMotion: false,                                   // Appearance
     textScale: 1, lineSpacing: 1, font: "system", pageWidth: "normal", showCounts: true,     // Text
     editStyle: "plain", spellcheck: true, smartLists: true, autoClose: true, math: true, pasteHtml: true   // Editing
   };
@@ -2279,6 +2297,7 @@
     d.caret = sel.f;
     if (!d.name) document.title = docTitle(d) + " - RunDown";
     el("docName").placeholder = autoTitle(d.text) || "Untitled";
+    renderTabs();
     return putRecord("docs", d).then(function(){ if (!saveTimer && el("saveState").textContent !== "Not saved") setSaveState("saved"); });
   }
   function docTitle(d){ return (d.name && d.name.trim()) || autoTitle(d.text) || "Untitled"; }
@@ -2293,12 +2312,15 @@
     return d;
   }
   function openDoc(id, focus){
-    if (curId && DOCS[curId] && curId !== id) flushSave();
+    if (curId && DOCS[curId] && curId !== id){ flushSave(); UNDO[curId] = { u: undoStack, r: redoStack, text: src }; }
     var d = DOCS[id]; if (!d) return;
     curId = id;
     try { localStorage.setItem(NS + "last", id); } catch (e){}
     setSrc(d.text || "");
-    undoStack = []; redoStack = [];
+    var keep = UNDO[id] && UNDO[id].text === src ? UNDO[id] : null;   // a tab keeps its undo history while its text is unchanged
+    undoStack = keep ? keep.u : []; redoStack = keep ? keep.r : [];
+    delete UNDO[id];
+    addTab(id);
     var c = Math.max(0, Math.min(d.caret || 0, src.length)); sel = { a: c, f: c };
     el("docName").value = d.name || ""; el("docName").placeholder = autoTitle(d.text) || "Untitled";
     document.title = docTitle(d) + " - RunDown";
@@ -2310,6 +2332,49 @@
     window.scrollTo(0, 0);
     if (focus && viewMode !== "read"){ ed.focus({ preventScroll: true }); edFocused = true; render(); ensureCaretVisible(); }
   }
+  /* ---------- Open documents as tabs: after Documents in the app bar, kept in localStorage runDown:tabs ---------- */
+  var TABS = [], UNDO = {};   // UNDO: doc id -> { u, r, text }, the undo history of a tab that isn't showing
+  function saveTabs(){ try { localStorage.setItem(NS + "tabs", JSON.stringify(TABS)); } catch (e){} }
+  function loadTabs(){
+    var t = []; try { t = JSON.parse(localStorage.getItem(NS + "tabs")) || []; } catch (e){}
+    TABS = (Array.isArray(t) ? t : []).filter(function(id, i, a){ return DOCS[id] && a.indexOf(id) === i; });
+  }
+  function addTab(id){
+    if (TABS.indexOf(id) < 0){ var at = TABS.indexOf(curId); if (at < 0 || id === curId) TABS.push(id); else TABS.splice(at + 1, 0, id); saveTabs(); }
+    renderTabs();
+  }
+  function closeTab(id){
+    var at = TABS.indexOf(id); if (at < 0) return;
+    if (id === curId) flushSave();
+    TABS.splice(at, 1); delete UNDO[id]; saveTabs();
+    if (id === curId){
+      var next = TABS[Math.min(at, TABS.length - 1)];
+      if (next) openDoc(next, true);
+      else { renderTabs(); show("docsScreen"); }   // the last tab: Write reopens it
+    } else renderTabs();
+  }
+  function renderTabs(){
+    var box = el("docTabs"), onWrite = !el("writeScreen").classList.contains("hidden");
+    box.innerHTML = "";
+    TABS.forEach(function(id){
+      var d = DOCS[id]; if (!d) return;
+      var t = document.createElement("span"), cur = id === curId && onWrite;
+      t.className = "dtab" + (cur ? " cur" : "");
+      var b = document.createElement("button"); b.type = "button"; b.className = "dtab-name"; b.textContent = docTitle(d); b.title = docTitle(d);
+      if (cur) b.setAttribute("aria-current", "page");
+      b.addEventListener("click", function(){ if (id === curId) focusWrite(); else openDoc(id, true); });
+      var x = document.createElement("button"); x.type = "button"; x.className = "dtab-x"; x.innerHTML = "&times;";
+      x.setAttribute("aria-label", "Close " + docTitle(d)); x.title = "Close";
+      x.addEventListener("click", function(e){ e.stopPropagation(); closeTab(id); });
+      t.addEventListener("auxclick", function(e){ if (e.button === 1){ e.preventDefault(); closeTab(id); } });   // middle click closes
+      t.appendChild(b); t.appendChild(x); box.appendChild(t);
+      if (cur){   // keep the current tab in view inside the app bar, without scrolling the page
+        var nav = box.parentNode, r = t.getBoundingClientRect(), n = nav.getBoundingClientRect();
+        if (r.left < n.left) nav.scrollLeft -= n.left - r.left + 8; else if (r.right > n.right) nav.scrollLeft += r.right - n.right + 8;
+      }
+    });
+  }
+  function focusWrite(){ show("writeScreen"); focusEditor(); }
   function sortedDocs(){ return Object.keys(DOCS).map(function(k){ return DOCS[k]; }).sort(function(a, b){ return b.updatedAt - a.updatedAt; }); }
   function smallBtn(label, kind, fn){ var b = document.createElement("button"); b.type = "button"; b.className = "btn sm" + (kind ? " " + kind : ""); b.textContent = label; b.addEventListener("click", fn); return b; }
   function renderDocs(){
@@ -2338,10 +2403,11 @@
   }
   function deleteDoc(d){
     if (!window.confirm("Delete \u201C" + docTitle(d) + "\u201D?\n\nThis can't be undone. Download it first if you want a copy.")) return;
-    delete DOCS[d.id]; delRecord("docs", d.id);
+    delete DOCS[d.id]; delRecord("docs", d.id); delete UNDO[d.id];
     pruneAssets();
-    if (curId === d.id){ curId = null; var rest = sortedDocs(); if (rest.length) openDoc(rest[0].id, false); else openDoc(newDoc("").id, false); show("docsScreen"); }
-    renderDocs();
+    var at = TABS.indexOf(d.id); if (at >= 0){ TABS.splice(at, 1); saveTabs(); }
+    if (curId === d.id){ curId = null; var next = TABS[Math.min(at, TABS.length - 1)] || (sortedDocs()[0] || {}).id; openDoc(next || newDoc("").id, false); show("docsScreen"); }
+    renderTabs(); renderDocs();
   }
   function pruneAssets(){
     var all = Object.keys(DOCS).map(function(k){ return DOCS[k].text || ""; }).join("\n");
@@ -2386,7 +2452,7 @@
       putRecord("docs", DOCS[d.id]); n++;
       if (d.id === curId) openDoc(d.id, false);
     });
-    renderEpoch++;
+    renderEpoch++; renderTabs();
     showToast(n ? "Restored " + plural(n, "document") + " from the backup." : "Everything in that backup is already here (or newer).", "OK", null, "info");
   }
   function withAssets(text){ return text.replace(/\]\(asset:([\w-]+)\)/g, function(m, id){ return ASSETS[id] ? "](" + ASSETS[id].data + ")" : m; }); }
@@ -2397,11 +2463,11 @@
   }
   var EXPORT_CSS = "body{margin:0;background:#fff;color:#1b2430;font:17px/1.65 system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}" +
     "main{max-width:760px;margin:0 auto;padding:48px 24px 80px}h1,h2,h3,h4,h5,h6{line-height:1.3;margin:1.4em 0 .4em}h1{font-size:2em}h2{font-size:1.55em}h3{font-size:1.28em}" +
-    "a{color:#0F766E}code{font:.87em ui-monospace,Consolas,Menlo,monospace;background:#f3f5f8;border:1px solid #e2e7ee;border-radius:5px;padding:.05em .3em}" +
+    "a{color:#1D4ED8}code{font:.87em ui-monospace,Consolas,Menlo,monospace;background:#f3f5f8;border:1px solid #e2e7ee;border-radius:5px;padding:.05em .3em}" +
     "pre{background:#f3f5f8;border:1px solid #e2e7ee;border-radius:10px;padding:12px 16px;overflow:auto}pre code{background:none;border:none;padding:0}" +
     "blockquote{margin:1em 0;padding:0 0 0 1em;border-left:3px solid #cbd3de;color:#5b6573}table{border-collapse:collapse;margin:1em 0}th,td{border:1px solid #cbd3de;padding:6px 12px;text-align:left}th{background:#f6f8fb}" +
     "img{max-width:100%;border-radius:8px}mark{background:#fceb9c}hr{border:none;border-top:2px solid #e2e7ee;margin:1.6em 0}.math{text-align:center;overflow-x:auto}ul.tasks{list-style:none;padding-left:1.2em}" +
-    "@media (prefers-color-scheme:dark){body{background:#0e1218;color:#e8ecf2}a{color:#2DD4BF}code,pre{background:#1c2531;border-color:#263140}th{background:#1c2531}th,td{border-color:#344257}blockquote{border-color:#344257;color:#96a0ad}mark{background:#5b4a12;color:inherit}hr{border-color:#263140}}";
+    "@media (prefers-color-scheme:dark){body{background:#0e1218;color:#e8ecf2}a{color:#6EA8FE}code,pre{background:#1c2531;border-color:#263140}th{background:#1c2531}th,td{border-color:#344257}blockquote{border-color:#344257;color:#96a0ad}mark{background:#5b4a12;color:inherit}hr{border-color:#263140}}";
   function withMath(fn){
     if (settings.math && /\$/.test(src) && katexState < 2){
       needKatex();
@@ -2463,6 +2529,7 @@
     if (id !== "writeScreen") window.scrollTo(0, 0);
     if (id === "settingsScreen") renderSettings();
     if (id === "docsScreen") renderDocs();
+    if (id === "writeScreen" && curId && DOCS[curId]) addTab(curId); else renderTabs();
   }
   // Browser Back returns to the page instead of leaving the app (as in QuizQrusher)
   var ignorePop = false;
@@ -2866,6 +2933,7 @@
     var d = DOCS[curId]; if (!d) return;
     d.name = el("docName").value; d.updatedAt = Date.now();
     document.title = docTitle(d) + " - RunDown";
+    renderTabs();
     setSaveState("saving"); clearTimeout(saveTimer); saveTimer = setTimeout(flushSave, 600);
   });
   el("docName").addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === "Escape"){ e.preventDefault(); focusEditor(); } });
@@ -2901,6 +2969,7 @@
   ["tblCols", "tblRows"].forEach(function(id){ el(id).addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); finishTable(); } }); });
   ["linkDialog", "imageDialog", "tableDialog"].forEach(function(id){ el(id).addEventListener("cancel", function(){ setTimeout(focusEditor, 0); }); });
   el("newDocBtn").addEventListener("click", function(){ openDoc(newDoc("").id, true); });
+  el("tabNewBtn").addEventListener("click", function(){ openDoc(newDoc("").id, true); });
   el("sampleBtn").addEventListener("click", function(){ openDoc(newDoc(WELCOME).id, true); });
   el("docSearch").addEventListener("input", renderDocs);
   var drop = el("importDrop"), inp = el("importInput");
@@ -2987,6 +3056,7 @@
     var last = null; try { last = localStorage.getItem(NS + "last"); } catch (e){}
     if (!Object.keys(DOCS).length) last = newDoc(WELCOME).id;
     if (!last || !DOCS[last]) last = sortedDocs()[0].id;
+    loadTabs();
     openDoc(last, false);
   }).catch(function(e){
     var b = el("storageBanner"); b.classList.remove("hidden"); b.classList.add("bad");
